@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kesselklang Festival</title>
+<meta name="description" content="Programm und Geländeplan des Kesselklang Festivals, 9. und 10. Juli 2027. Funktioniert nach dem ersten Laden auch ohne Internet.">
+<meta name="theme-color" content="#1b1530">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+/* Keine externen Schriften, Bibliotheken oder Bilder: alles muss nach dem ersten Laden offline funktionieren. */
+:root{
+  --bg:#f4f2fa; --surface:#ffffff; --ink:#1b1530; --muted:#5d5873; --line:#e2deef; --chip:#ebe8f5;
+  --accent:#6a3df0; --on-accent:#ffffff; --accent-soft:#e9e2ff;
+  --night:#1b1530; --sun:#ffc83d; --sun-ink:#3a2a00; --sun-soft:#fff3cf;
+  --ok:#13804f; --ok-soft:#dcf3e7; --bad:#b3261e; --bad-soft:#fbe1de;
+  --map-bg:#dcefc9; --map-forest:#b3d797; --map-path:#fbf7ec; --map-edge:#9cbf83; --map-text:#1b1530;
+  --st-H:#6a3df0; --st-Z:#a77a0e; --st-W:#2e7d32;
+  --c-wc:#1f6fd1; --c-food:#e0661a; --c-drink:#c0267a; --c-water:#0f8fa6; --c-aid:#d62e2e;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --display:"Avenir Next","Segoe UI Variable Display","Segoe UI",-apple-system,Roboto,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+  --gl:max(16px,env(safe-area-inset-left)); --gr:max(16px,env(safe-area-inset-right));
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#120e20; --surface:#1c1730; --ink:#efecf8; --muted:#a7a1bd; --line:#2e2846; --chip:#272140;
+  --accent:#9b7bff; --on-accent:#140c2e; --accent-soft:#2c2350;
+  --sun-soft:#3a2f12; --ok:#5fd39b; --ok-soft:#163a2a; --bad:#ff8a80; --bad-soft:#3d1d1a;
+  --map-bg:#22331b; --map-forest:#2f4a25; --map-path:#46523f; --map-edge:#3b5530; --map-text:#efecf8;
+  color-scheme:dark}}
+
+*{box-sizing:border-box}
+html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--font);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+
+/* Kopfbereich */
+.site{position:sticky;top:0;z-index:20;background:var(--night);color:#fff;padding-top:env(safe-area-inset-top)}
+.hbar{display:flex;align-items:center;gap:20px;min-height:62px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font:700 19px/1 var(--display);flex:none}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--sun);display:grid;place-items:center}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{color:#d6d0ee;text-decoration:none;font-weight:600;font-size:15px;padding:8px 13px;border-radius:10px;white-space:nowrap}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav a[aria-current="page"]{color:#fff;background:rgba(255,255,255,.14)}
+.net{flex:none;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;white-space:nowrap;text-decoration:none}
+.net i{width:8px;height:8px;border-radius:50%;background:#bbb}
+.net.ok i{background:#5fd39b}.net.wait i{background:var(--sun)}
+@media (max-width:779px){
+  .hbar{flex-wrap:wrap;gap:8px 12px;padding-block:10px 0;min-height:0}
+  .net{margin-left:auto}
+  .nav{order:3;width:calc(100% + var(--gl) + var(--gr));margin:0 calc(-1*var(--gr)) 0 calc(-1*var(--gl));padding:0 var(--gr) 8px var(--gl);overflow-x:auto;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{padding:7px 12px}
+}
+
+/* Hero */
+.hero{background:var(--night);color:#fff;padding-block:28px 44px}
+.hero .eyebrow{color:var(--sun)}
+.hero h1{font-size:clamp(36px,7vw,64px);font-weight:800;margin-top:8px;letter-spacing:-.03em}
+.hero p.lead{color:#d6d0ee;max-width:58ch;margin-top:12px;font-size:17px}
+.hero .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero .facts span{background:rgba(255,255,255,.1);border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600}
+.hero .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero .btn{border-color:transparent}
+.hero .btn.sun{background:var(--sun);color:var(--sun-ink)}
+.hero .btn.out{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+
+main{padding-block:28px 40px}
+.page{display:flex;flex-direction:column;gap:28px}
+.phead{display:flex;flex-direction:column;gap:6px}
+.phead h1{font-size:clamp(28px,4.5vw,40px);font-weight:800}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sec>h2{font-size:22px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+
+/* Bedienelemente */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 15px;font-weight:700;min-height:44px;text-decoration:none;color:inherit}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:14px;border-radius:10px}
+.btn.ghost{border-color:transparent;background:none;color:var(--accent);padding-inline:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:14.5px;font-weight:600;white-space:nowrap;min-height:40px}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.seg{display:inline-grid;grid-auto-flow:column;grid-auto-columns:1fr;background:var(--chip);border-radius:14px;padding:4px}
+.seg button{border:0;background:none;border-radius:11px;padding:8px 16px;font-weight:700;color:var(--muted);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--chip);color:var(--muted);white-space:nowrap}
+.pill.now{background:var(--sun);color:var(--sun-ink)}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.soon{background:var(--accent-soft);color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px}
+
+/* Demozeit */
+.clock{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;background:var(--sun-soft);border-radius:16px;padding:12px 16px}
+.clock b{font:700 16px var(--mono);font-variant-numeric:tabular-nums}
+.clock .set{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.clock select,.clock input{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;min-height:40px}
+
+/* Start */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.stage{display:grid;grid-template-columns:6px minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 16px 16px 0;overflow:hidden}
+.stage>i{border-radius:0 6px 6px 0}
+.stage .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.stage .act{font:700 21px/1.2 var(--display);margin-top:8px}
+.stage .meta{font-size:14px;color:var(--muted)}
+.stage .next{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:14.5px}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.qt{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:14px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.qt:hover{border-color:var(--accent)}
+.qt b{font:700 22px var(--mono);font-variant-numeric:tabular-nums}
+.qt span{font-size:13.5px;color:var(--muted);line-height:1.3}
+.ic{border-radius:50%;display:grid;place-items:center;flex:none}
+.note{display:flex;gap:12px;align-items:flex-start;background:var(--accent-soft);border-radius:16px;padding:14px 16px;font-size:15px}
+
+/* Programm: Liste */
+.acts{display:flex;flex-direction:column;gap:8px}
+.actc{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:16px;display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:14px;align-items:start;padding:13px 16px;text-align:left}
+.actc:hover{border-color:var(--accent)}
+.actc.past{opacity:.55}
+.actc.running{border-color:var(--sun);box-shadow:inset 4px 0 0 var(--sun)}
+.atime{font:600 14px/1.4 var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);display:flex;flex-direction:column}
+.atime b{color:var(--ink)}
+.aname{font-weight:700;font-size:17px;line-height:1.25;display:block}
+.actc>span{min-width:0}
+.ameta{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.ameta .dot{display:inline-block;margin-right:6px;vertical-align:0}
+/* Programm: Zeitplan */
+.tt{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.tt-in{display:grid;grid-template-columns:54px repeat(var(--n),minmax(140px,1fr))}
+.tt-h{position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 10px;font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:8px;z-index:1}
+.tt-axis,.tt-col{position:relative;height:var(--h)}
+.tt-col{border-left:1px solid var(--line);background-image:repeating-linear-gradient(to bottom,var(--line) 0 1px,transparent 1px var(--hr))}
+.tt-axis span{position:absolute;right:8px;font:600 12px var(--mono);color:var(--muted);transform:translateY(-50%)}
+.tt-axis span:first-child{transform:none}
+.tt-act{position:absolute;left:5px;right:5px;border:0;border-radius:10px;padding:6px 9px;text-align:left;background:var(--chip);overflow:hidden;display:flex;flex-direction:column;gap:1px;font-size:13px;line-height:1.25}
+.tt-act:hover{filter:brightness(.97);outline:2px solid var(--accent)}
+.tt-act b{font-size:14px}
+.tt-act small{font:600 11.5px var(--mono);color:var(--muted)}
+.tt-act.running{background:var(--sun);color:var(--sun-ink)}
+.tt-act.running small{color:var(--sun-ink)}
+.tt-act.past{opacity:.5}
+.tt-now{position:absolute;left:0;right:0;height:2px;background:var(--bad);z-index:2;pointer-events:none}
+
+/* Geländeplan */
+.planlay{display:grid;gap:22px}
+@media (min-width:900px){.planlay{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start}.mapcol{position:sticky;top:84px}}
+.mapwrap{background:var(--map-bg);border-radius:20px;overflow:hidden;border:1px solid var(--line);touch-action:manipulation;max-width:560px;margin-inline:auto}
+.mapwrap.placing{outline:3px dashed var(--accent);outline-offset:-3px;cursor:crosshair}
+#map{display:block;width:100%;height:auto}
+.mk{cursor:pointer}
+@media (prefers-reduced-motion:no-preference){
+  .pulse{animation:pulse 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+  @keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(2.2);opacity:0}}
+}
+.side{display:flex;flex-direction:column;gap:18px;min-width:0}
+.pos{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+.pos select{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;min-height:40px;max-width:100%}
+.hint{background:var(--accent-soft);border-radius:12px;padding:10px 12px;font-size:14px}
+.poicard{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start}
+.list{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.list button{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:12px;align-items:center;border:0;border-bottom:1px solid var(--line);background:none;padding:11px 14px;text-align:left}
+.list button:last-child{border-bottom:0}
+.list button:hover,.list button[aria-current="true"]{background:var(--accent-soft)}
+.list .d{font:700 14px var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.list .d small{display:block;font:500 12px var(--font);color:var(--muted)}
+.dir{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.dir h3{font-size:16px;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+
+/* Infos und Technik */
+.infos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.kv{display:grid;grid-template-columns:minmax(110px,auto) minmax(0,1fr);gap:4px 14px;font-size:15px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:600}
+ol.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.checks li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;align-items:start}
+.checks .s{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px}
+.checks .s.ok{background:var(--ok-soft);color:var(--ok)}
+.checks .s.bad{background:var(--bad-soft);color:var(--bad)}
+.checks .s.wait{background:var(--chip);color:var(--muted)}
+.checks b{display:block}
+
+/* Dialog, Toast, Fuß */
+.modal{position:fixed;inset:0;z-index:40;background:rgba(10,6,24,.55);display:flex;align-items:flex-end;justify-content:center;padding:16px var(--gr) calc(16px + env(safe-area-inset-bottom)) var(--gl)}
+@media (min-width:700px){.modal{align-items:center}}
+.mbox{background:var(--surface);border-radius:22px;max-width:520px;width:100%;max-height:85vh;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.mbox .x{align-self:flex-end;margin:-8px -8px 0 0;border:0;background:var(--chip);width:36px;height:36px;border-radius:50%;font-size:18px;line-height:1}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom));background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:12px;font-size:14.5px;font-weight:600;display:flex;gap:10px;align-items:center;max-width:calc(100% - 32px);z-index:50;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+.toast button{border:0;background:var(--sun);color:var(--sun-ink);border-radius:8px;padding:5px 10px;font-weight:700}
+footer{border-top:1px solid var(--line);padding-block:22px calc(28px + env(safe-area-inset-bottom));font-size:13.5px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="#start"><span class="logo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#1b1530"><rect x="3" y="10" width="3.2" height="10" rx="1.6"/><rect x="8.2" y="5" width="3.2" height="15" rx="1.6"/><rect x="13.4" y="8" width="3.2" height="12" rx="1.6"/><rect x="18.6" y="12" width="3.2" height="8" rx="1.6"/></svg></span>Kesselklang</a>
+    <nav class="nav" id="nav" aria-label="Hauptnavigation">
+      <a href="#start">Jetzt</a><a href="#programm">Programm</a><a href="#plan">Geländeplan</a><a href="#infos">Infos</a>
+    </nav>
+    <a class="net" id="net" href="#technik" title="Technik-Check öffnen"><i></i><span>Prüfe…</span></a>
+  </div>
+</header>
+<div id="heroSlot"></div>
+<main class="wrap" id="view"></main>
+<footer><div class="wrap"><span>Kesselklang Festival · Beispiel-Festival mit erfundenen Daten · Increment Sprint 1 der Stoßtruppschicht</span><a href="#technik">Technik-Check (Offline-Test)</a></div></footer>
+<div class="modal" id="modal" hidden></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+/* ===================== Beispiel-Festival (frei erfunden) ===================== */
+const FEST={name:'Kesselklang Festival',place:'Kesselwiese, Stuttgart',dates:['Freitag, 9. Juli 2027','Samstag, 10. Juli 2027'],
+  open:['15:00–01:00 Uhr','13:00–02:00 Uhr'],guests:'ca. 12.000 Besuchende pro Tag'};
+const DAYS=['Freitag','Samstag'],DSHORT=['Fr 9.7.','Sa 10.7.'];
+const STAGES={
+  H:{name:'Hauptbühne',x:200,y:62,w:150,h:46,i:'Open Air, große LED-Wand, Platz für 8.000 Personen'},
+  Z:{name:'Zeltbühne',x:322,y:334,w:84,h:56,i:'Überdachtes Zelt, 2.500 Personen, bei Regen die erste Wahl'},
+  W:{name:'Waldbühne',x:84,y:402,w:92,h:44,i:'Kleine Bühne am Wäldchen, 600 Personen, ruhigere Acts'}
+};
+const ACTS=[
+  {d:0,s:'W',t:'17:00',e:'18:00',n:'Moosgeflüster',g:'Folk',x:'Zweistimmiger Gesang, Geige und Kontrabass zum Ankommen.'},
+  {d:0,s:'H',t:'18:00',e:'19:00',n:'Nordlicht Kollektiv',g:'Indie-Pop',x:'Sechsköpfige Band mit Bläsern, ideal zum Start ins Wochenende.'},
+  {d:0,s:'W',t:'18:30',e:'19:30',n:'Tannenzapfen Trio',g:'Akustik',x:'Gitarre, Cajón und Mandoline. Sitzkissen gibt es am Waldrand.'},
+  {d:0,s:'Z',t:'19:00',e:'20:00',n:'Kesselkinder',g:'Hip-Hop',x:'Stuttgarter Crew mit Live-Band und viel Publikumsbeteiligung.'},
+  {d:0,s:'H',t:'19:45',e:'21:00',n:'Die Stapelfahrer',g:'Deutschrock',x:'Laute Gitarren und Texte zum Mitsingen.'},
+  {d:0,s:'W',t:'20:00',e:'21:00',n:'Jona Sommerfeld',g:'Singer-Songwriter',x:'Ruhige Songs am Klavier, mit Lichterketten im Wald.'},
+  {d:0,s:'Z',t:'20:30',e:'21:30',n:'Mira Okon',g:'R&B',x:'Soulige Stimme, elektronische Beats.'},
+  {d:0,s:'H',t:'21:45',e:'23:30',n:'Velvet Marlin',g:'Synth-Pop · Headliner',x:'Headliner am Freitag mit großer Lichtshow.'},
+  {d:0,s:'Z',t:'22:30',e:'00:30',n:'Bass im Kessel',g:'Techno · DJ-Set',x:'Zwei DJs im Wechsel bis nach Mitternacht.'},
+  {d:1,s:'W',t:'15:00',e:'16:00',n:'Feldlerche',g:'Folk-Pop',x:'Leichte Melodien für den Nachmittag.'},
+  {d:1,s:'H',t:'16:00',e:'17:00',n:'Hafenkran',g:'Punk-Pop',x:'Schnell, laut, gut gelaunt.'},
+  {d:1,s:'W',t:'16:30',e:'17:30',n:'Holzweg',g:'Bluegrass',x:'Banjo und Mundharmonika, Tanzen ausdrücklich erwünscht.'},
+  {d:1,s:'H',t:'17:45',e:'19:00',n:'Glasperlen',g:'Indie-Rock',x:'Gitarrenwände und eingängige Refrains.'},
+  {d:1,s:'Z',t:'18:00',e:'19:00',n:'Wortwechsel',g:'Poetry & Beats',x:'Spoken Word mit DJ-Begleitung.'},
+  {d:1,s:'W',t:'18:00',e:'19:15',n:'Mondschein Quartett',g:'Jazz',x:'Jazz-Standards zum Sonnenuntergang.'},
+  {d:1,s:'Z',t:'19:30',e:'20:45',n:'Kalt & Klar',g:'Post-Punk',x:'Dunkle Synthesizer und treibender Bass.'},
+  {d:1,s:'H',t:'19:45',e:'21:15',n:'Neonwald',g:'Elektro-Pop',x:'Tanzbare Songs mit Visuals auf der LED-Wand.'},
+  {d:1,s:'Z',t:'21:30',e:'23:00',n:'Sundown Society',g:'House',x:'Warmer House-Sound im Zelt.'},
+  {d:1,s:'H',t:'22:00',e:'23:45',n:'The Lantern Sons',g:'Rock · Headliner',x:'Headliner am Samstag, Abschluss auf der Hauptbühne.'},
+  {d:1,s:'Z',t:'23:30',e:'01:00',n:'Funkkessel',g:'Funk & Disco · DJ-Set',x:'Aftershow bis 1 Uhr.'}
+];
+const CATS={
+  stage:{name:'Bühnen',one:'Bühne',color:'var(--st-H)'},
+  wc:{name:'Toiletten',one:'Toilette',color:'var(--c-wc)'},
+  food:{name:'Essen',one:'Essen',color:'var(--c-food)'},
+  drink:{name:'Getränke',one:'Getränke',color:'var(--c-drink)'},
+  water:{name:'Wasser',one:'Trinkwasser',color:'var(--c-water)'},
+  aid:{name:'Erste Hilfe',one:'Erste Hilfe',color:'var(--c-aid)'}
+};
+const POIS=[
+  {id:'wc1',c:'wc',n:'WC Nord',x:58,y:96,i:'12 Kabinen, Händewaschen'},
+  {id:'wc2',c:'wc',n:'WC Ost',x:352,y:164,i:'10 Kabinen, 1 barrierefrei'},
+  {id:'wc3',c:'wc',n:'WC Mitte',x:150,y:300,i:'20 Kabinen, 2 barrierefrei, Wickeltisch'},
+  {id:'wc4',c:'wc',n:'WC Süd',x:120,y:505,i:'8 Kabinen, nahe Haupteingang'},
+  {id:'f1',c:'food',n:'Food Court',x:262,y:212,i:'Burger, Pommes, Falafel, Crêpes · bis 1 Uhr'},
+  {id:'f2',c:'food',n:'Streetfood am Wald',x:150,y:352,i:'Maultaschen, Käsespätzle, vegane Bowls · bis 23 Uhr'},
+  {id:'f3',c:'food',n:'Pizza & Pasta',x:300,y:450,i:'Pizza vom Holzofen, Pasta · bis 0 Uhr'},
+  {id:'d1',c:'drink',n:'Bar Hauptbühne',x:104,y:134,i:'Bier, Softdrinks, Becherpfand 2 €'},
+  {id:'d2',c:'drink',n:'Bar Zelt',x:372,y:404,i:'Bier, Longdrinks · bis 1 Uhr'},
+  {id:'d3',c:'drink',n:'Cocktailbar',x:166,y:238,i:'Cocktails und alkoholfreie Drinks'},
+  {id:'w1',c:'water',n:'Trinkwasser Nord',x:296,y:124,i:'Kostenlos, eigene Flasche oder Becher mitbringen'},
+  {id:'w2',c:'water',n:'Trinkwasser Wald',x:38,y:340,i:'Kostenlos, 6 Zapfstellen'},
+  {id:'w3',c:'water',n:'Trinkwasser Süd',x:250,y:492,i:'Kostenlos, nahe Haupteingang'},
+  {id:'a1',c:'aid',n:'Sanitätszelt',x:214,y:404,i:'Rund um die Uhr besetzt, Notruf auch über jedes Ordnerteam'},
+  {id:'a2',c:'aid',n:'Erste Hilfe Nord',x:346,y:74,i:'Besetzt, solange die Hauptbühne spielt'}
+];
+const LANDMARKS=[
+  {n:'Haupteingang',x:200,y:530},{n:'Hauptbühne',x:200,y:110},{n:'Zeltbühne',x:300,y:380},
+  {n:'Waldbühne',x:110,y:440},{n:'Food Court',x:262,y:232},{n:'Sanitätszelt',x:214,y:384}
+];
+/* Dateien, die der Service Worker speichert (muss zu sw.js passen) */
+const OFFLINE_FILES=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+
+/* ===================== Hilfsfunktionen ===================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toMin=(s,start)=>{const [h,m]=s.split(':').map(Number);let v=h*60+m;if(h<6)v+=1440;if(start!=null&&v<=start)v+=1440;return v};
+ACTS.forEach((a,i)=>{a.id=i;a.s0=toMin(a.t);a.s1=toMin(a.e,a.s0)});
+const hhmm=v=>{v=((v%1440)+1440)%1440;return String(Math.floor(v/60)).padStart(2,'0')+':'+String(v%60).padStart(2,'0')};
+const dist=(a,b)=>Math.round(Math.hypot(a.x-b.x,a.y-b.y)*1.25/10)*10;
+const walk=m=>Math.max(1,Math.round(m/60));
+const dur=v=>v<60?`${v} Min.`:`${Math.floor(v/60)} Std.${v%60?' '+(v%60)+' Min.':''}`;
+const stagePois=()=>Object.entries(STAGES).map(([k,s])=>({id:'st'+k,c:'stage',n:s.name,x:s.x,y:s.y+s.h/2,i:s.i,stage:k}));
+const allPois=()=>[...stagePois(),...POIS];
+const poiById=id=>allPois().find(p=>p.id===id);
+const nearest=c=>allPois().filter(p=>p.c===c).map(p=>({...p,m:dist(p,S.pos)})).sort((a,b)=>a.m-b.m)[0];
+const whereName=p=>{const l=LANDMARKS.map(x=>({...x,m:Math.hypot(x.x-p.x,x.y-p.y)})).sort((a,b)=>a.m-b.m)[0];return l.m<35?l.n:'Nähe '+l.n};
+function statusOf(a){if(a.d!==S.simDay)return a.d<S.simDay?'past':'future';if(S.simMin>=a.s1)return'past';if(S.simMin>=a.s0)return'running';return'future'}
+const runningOn=(d,k)=>ACTS.find(a=>a.d===d&&a.s===k&&S.simMin>=a.s0&&S.simMin<a.s1);
+const nextOn=(d,k)=>ACTS.filter(a=>a.d===d&&a.s===k&&a.s0>S.simMin).sort((a,b)=>a.s0-b.s0)[0];
+
+const ICON={
+  wc:'<text x="0" y="3.6" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="Arial,sans-serif">WC</text>',
+  food:'<path d="M-4.5-6v4.5a2 2 0 0 0 4 0V-6M-2.5-6V6M4-6c-2.2 1.5-2.2 6 0 7.5V6" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+  drink:'<path d="M-5-5.5h10L3 6h-6z M-4.2-1h8.4" stroke="#fff" stroke-width="1.7" fill="none" stroke-linejoin="round"/>',
+  water:'<path d="M0-6.5c3 4 5 6.4 5 9a5 5 0 0 1-10 0c0-2.6 2-5 5-9z" fill="#fff"/>',
+  aid:'<path d="M-2.2-6.5h4.4v4.3h4.3v4.4H2.2v4.3h-4.4V2.2h-4.3v-4.4h4.3z" fill="#fff"/>',
+  stage:'<path d="M0-6.5l1.9 4 4.4.5-3.3 3 .9 4.4L0 3.2l-3.9 2.2.9-4.4-3.3-3 4.4-.5z" fill="#fff"/>'
+};
+const ic=(c,size,color)=>`<span class="ic" style="width:${size}px;height:${size}px;background:${color||CATS[c].color}"><svg width="${size*.55}" height="${size*.55}" viewBox="-8 -8 16 16" aria-hidden="true">${ICON[c]}</svg></span>`;
+const PIN='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+
+/* ===================== Zustand ===================== */
+const KEY='kesselklang-web-v1';
+const DEF={day:1,stage:'all',view:null,cats:[],pos:{x:200,y:530},sel:null,route:false,simDay:1,simMin:1230};
+let S;try{S={...DEF,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){S={...DEF}}
+let UI={page:'start',placing:false,modal:null,check:null};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const PAGES=['start','programm','plan','infos','technik'];
+
+/* ===================== Seite: Jetzt ===================== */
+function heroHTML(){
+  return `<section class="hero"><div class="wrap"><p class="eyebrow">9.–10. Juli 2027 · ${esc(FEST.place)}</p>
+    <h1>Kesselklang Festival</h1>
+    <p class="lead">Programm und Geländeplan für dein Festivalwochenende. Einmal öffnen, danach funktioniert alles auch ohne Netz, wenn auf dem Gelände nichts mehr geht.</p>
+    <div class="facts"><span>2 Tage</span><span>3 Bühnen</span><span>${ACTS.length} Acts</span><span>${POIS.length} Orte im Plan</span></div>
+    <div class="cta"><a class="btn sun" href="#programm">Zum Programm</a><a class="btn out" href="#plan">Zum Geländeplan</a></div></div></section>`;
+}
+function clockHTML(){
+  return `<div class="clock"><div><span class="eyebrow">Demozeit für den Test</span><br><b>${DAYS[S.simDay]}, ${hhmm(S.simMin)} Uhr</b></div>
+    <div class="set"><label class="small" for="cDay">Tag</label><select id="cDay" data-ch="simDay">${DAYS.map((d,i)=>`<option value="${i}"${i===S.simDay?' selected':''}>${d}</option>`).join('')}</select>
+    <label class="small" for="cTime">Uhrzeit</label><input id="cTime" type="time" step="900" value="${hhmm(S.simMin)}" data-ch="simMin"></div></div>`;
+}
+function startHTML(){
+  let h=clockHTML()+`<section class="sec"><h2>Was läuft gerade?</h2><div class="grid3">`;
+  for(const k of Object.keys(STAGES)){
+    const run=runningOn(S.simDay,k),next=nextOn(S.simDay,k);
+    h+=`<article class="stage"><i style="background:var(--st-${k})"></i><div>
+      <div class="top"><span class="eyebrow" style="color:var(--st-${k})">${STAGES[k].name}</span>${run?'<span class="pill now">Läuft gerade</span>':'<span class="pill">Pause</span>'}</div>
+      ${run?`<p class="act">${esc(run.n)}</p><p class="meta">${esc(run.g)} · bis ${run.e} Uhr</p>`:`<p class="act muted" style="font-weight:600">${next?'Gleich geht es weiter':'Für heute vorbei'}</p>`}
+      ${next?`<p class="next"><span class="muted">Danach:</span> <b>${esc(next.n)}</b> um ${next.t} <span class="muted">(in ${dur(next.s0-S.simMin)})</span></p>`:''}
+      <p style="margin-top:8px"><button class="btn ghost sm" data-act="showPoi" data-v="st${k}">${PIN} Auf dem Plan zeigen</button></p></div></article>`;
+  }
+  h+=`</div></section><section class="sec"><div class="row"><h2>Schnell finden</h2><span class="small muted">von deinem Standort: <b>${esc(whereName(S.pos))}</b> · <a href="#plan">ändern</a></span></div>
+    <div class="quick">${['wc','food','water','aid'].map(c=>{const p=nearest(c);return `<button class="qt" data-act="showPoi" data-v="${p.id}">${ic(c,34)}<b>${walk(p.m)} Min.</b><span>${CATS[c].one}<br><strong style="color:var(--ink)">${esc(p.n)}</strong> · ${p.m} m</span></button>`}).join('')}</div></section>
+    <div class="note"><span style="font-size:20px;line-height:1" aria-hidden="true">⚡</span><p><b>Funktioniert ohne Netz.</b> Wenn oben „Offline bereit“ steht, ist die Website auf deinem Handy gespeichert. Programm und Plan laufen dann auch im Flugmodus. <a href="#technik">Technik-Check</a></p></div>`;
+  return h;
+}
+
+/* ===================== Seite: Programm ===================== */
+function progHTML(){
+  const view=S.view||(innerWidth>=780?'grid':'list');
+  const list=ACTS.filter(a=>a.d===S.day&&(S.stage==='all'||a.s===S.stage)).sort((a,b)=>a.s0-b.s0||a.s.localeCompare(b.s));
+  let h=`<div class="phead"><p class="eyebrow">2 Tage · 3 Bühnen · ${ACTS.length} Acts</p><h1>Programm</h1></div>
+   <div class="controls"><div class="seg" role="group" aria-label="Festivaltag">${DAYS.map((d,i)=>`<button data-act="day" data-v="${i}" aria-pressed="${S.day===i}">${d} <span class="muted small">${DSHORT[i].split(' ')[1]}</span></button>`).join('')}</div>
+   <div class="seg" role="group" aria-label="Ansicht"><button data-act="view" data-v="list" aria-pressed="${view==='list'}">Liste</button><button data-act="view" data-v="grid" aria-pressed="${view==='grid'}">Zeitplan</button></div></div>
+   <div class="chips" role="group" aria-label="Bühne filtern"><button class="chip" data-act="stage" data-v="all" aria-pressed="${S.stage==='all'}">Alle Bühnen</button>
+   ${Object.entries(STAGES).map(([k,s])=>`<button class="chip" data-act="stage" data-v="${k}" aria-pressed="${S.stage===k}"><span class="dot" style="background:var(--st-${k})"></span>${s.name}</button>`).join('')}</div>
+   <p class="small muted">${list.length} ${list.length===1?'Act':'Acts'} am ${DAYS[S.day]}${S.stage!=='all'?' auf der '+STAGES[S.stage].name:''}${S.day===S.simDay?` · Demozeit ${hhmm(S.simMin)} Uhr`:''} · Antippen für Details</p>`;
+  return h+(view==='grid'?gridHTML(list):listHTML(list));
+}
+function badge(a){
+  const st=statusOf(a);
+  if(st==='running')return'<span class="pill now">Läuft gerade</span>';
+  if(a.d===S.simDay&&st==='past')return'<span class="pill">Vorbei</span>';
+  if(a.d===S.simDay&&a.s0-S.simMin<=60)return`<span class="pill soon">in ${a.s0-S.simMin} Min.</span>`;
+  return'';
+}
+function listHTML(list){
+  return `<div class="acts">${list.map(a=>{const st=statusOf(a),b=badge(a);
+    return `<button class="actc ${st==='running'?'running':''} ${st==='past'&&a.d===S.simDay?'past':''}" data-act="openAct" data-v="${a.id}">
+      <span class="atime"><b>${a.t}</b>${a.e}</span>
+      <span><span class="aname">${esc(a.n)}</span><span class="ameta"><span class="dot" style="background:var(--st-${a.s})"></span>${STAGES[a.s].name} · ${esc(a.g)}</span></span>
+      <span>${b}</span></button>`}).join('')}</div>`;
+}
+function gridHTML(list){
+  const keys=S.stage==='all'?Object.keys(STAGES):[S.stage];
+  const day=ACTS.filter(a=>a.d===S.day);
+  const t0=Math.floor(Math.min(...day.map(a=>a.s0))/60)*60,t1=Math.ceil(Math.max(...day.map(a=>a.s1))/60)*60;
+  const ppm=1.35,H=(t1-t0)*ppm;
+  let h=`<div class="tt"><div class="tt-in" style="--n:${keys.length};--h:${H}px;--hr:${60*ppm}px"><div class="tt-h"></div>
+    ${keys.map(k=>`<div class="tt-h"><span class="dot" style="background:var(--st-${k})"></span>${STAGES[k].name}</div>`).join('')}
+    <div class="tt-axis">${Array.from({length:(t1-t0)/60},(_,i)=>`<span style="top:${i*60*ppm}px">${hhmm(t0+i*60)}</span>`).join('')}</div>`;
+  const nowY=S.day===S.simDay&&S.simMin>=t0&&S.simMin<=t1?(S.simMin-t0)*ppm:null;
+  for(const k of keys){
+    h+=`<div class="tt-col">${nowY!=null?`<div class="tt-now" style="top:${nowY}px"></div>`:''}`;
+    for(const a of list.filter(x=>x.s===k)){const st=statusOf(a);
+      h+=`<button class="tt-act ${st==='running'?'running':''} ${st==='past'&&a.d===S.simDay?'past':''}" style="top:${(a.s0-t0)*ppm+2}px;height:${(a.s1-a.s0)*ppm-4}px;box-shadow:inset 4px 0 0 var(--st-${k})" data-act="openAct" data-v="${a.id}">
+        <small>${a.t}–${a.e}</small><b>${esc(a.n)}</b><span class="muted">${esc(a.g)}</span></button>`}
+    h+='</div>';
+  }
+  return h+`</div></div>${nowY!=null?'<p class="small muted">Die rote Linie zeigt die Demozeit.</p>':''}`;
+}
+
+/* ===================== Seite: Geländeplan ===================== */
+function mapSVG(){
+  const show=c=>!S.cats.length||S.cats.includes(c);
+  let s=`<svg id="map" viewBox="0 0 400 560" role="img" aria-label="Geländeplan mit Bühnen, Toiletten, Essen, Getränken, Trinkwasser und Erster Hilfe">
+   <rect width="400" height="560" fill="var(--map-bg)"/>
+   <path d="M0 336 C60 322 140 330 176 352 L188 470 C120 488 50 482 0 476Z" fill="var(--map-forest)"/>
+   <rect x="6" y="6" width="388" height="548" rx="16" fill="none" stroke="var(--map-edge)" stroke-width="3" stroke-dasharray="8 6"/>
+   <path d="M200 552V96 M40 182H370 M200 356L300 340 M200 380L110 404 M200 270H340" stroke="var(--map-path)" stroke-width="16" stroke-linecap="round" fill="none"/>
+   <text x="44" y="470" font-size="11" font-weight="700" fill="var(--map-text)" opacity=".55" font-family="Arial,sans-serif">Wäldchen</text>
+   <g transform="translate(376 36)" opacity=".7"><path d="M0-14 5 0H-5z" fill="var(--map-text)"/><text y="12" text-anchor="middle" font-size="10" font-weight="800" fill="var(--map-text)" font-family="Arial,sans-serif">N</text></g>
+   <g><rect x="168" y="540" width="64" height="16" rx="4" fill="var(--ok)"/><text x="200" y="551.5" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fff" font-family="Arial,sans-serif">EINGANG</text></g>`;
+  for(const [k,st] of Object.entries(STAGES)){
+    const sel=S.sel==='st'+k;
+    s+=`<g class="mk" data-poi="st${k}" opacity="${show('stage')?1:.3}"><rect x="${st.x-st.w/2}" y="${st.y-st.h/2}" width="${st.w}" height="${st.h}" rx="8" fill="var(--st-${k})" stroke="${sel?'var(--ink)':'none'}" stroke-width="3"/>
+      <text x="${st.x}" y="${st.y+4.5}" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="Arial,sans-serif">${st.name}</text></g>`;
+  }
+  if(S.route&&S.sel){const p=poiById(S.sel);if(p)s+=`<line x1="${S.pos.x}" y1="${S.pos.y}" x2="${p.x}" y2="${p.y}" stroke="var(--ink)" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>`}
+  for(const p of POIS){if(!show(p.c))continue;const sel=S.sel===p.id;
+    s+=`<g class="mk" data-poi="${p.id}" transform="translate(${p.x} ${p.y})"><circle r="18" fill="transparent"/>${sel?'<circle r="16.5" fill="none" stroke="var(--ink)" stroke-width="3"/>':''}
+      <circle r="12" fill="${CATS[p.c].color}" stroke="#fff" stroke-width="2"/>${ICON[p.c]}</g>`}
+  s+=`<g style="pointer-events:none" transform="translate(${S.pos.x} ${S.pos.y})"><circle class="pulse" r="10" fill="var(--accent)" opacity=".5"/><circle r="8" fill="var(--accent)" stroke="#fff" stroke-width="3"/>
+    <text y="-14" text-anchor="middle" font-size="11" font-weight="800" fill="var(--map-text)" font-family="Arial,sans-serif">Du</text></g></svg>`;
+  return s;
+}
+function planHTML(){
+  let h=`<div class="phead"><p class="eyebrow">Geländeplan · ${POIS.length+3} Orte</p><h1>Wo finde ich was?</h1></div>
+  <div class="chips" role="group" aria-label="Kategorien filtern"><button class="chip" data-act="cat" data-v="all" aria-pressed="${!S.cats.length}">Alles</button>
+   ${Object.keys(CATS).map(c=>`<button class="chip" data-act="cat" data-v="${c}" aria-pressed="${S.cats.includes(c)}"><span class="dot" style="background:${CATS[c].color}"></span>${CATS[c].name}</button>`).join('')}</div>
+  <div class="planlay"><div class="mapcol"><div class="mapwrap${UI.placing?' placing':''}" id="mapwrap">${mapSVG()}</div></div><div class="side">
+   <div class="card"><div class="pos"><div>${PIN} <span class="small muted">Dein Standort</span><br><b>${esc(whereName(S.pos))}</b></div>
+     <div style="display:flex;gap:8px;flex-wrap:wrap"><select id="posSel" data-ch="pos" aria-label="Standort wählen"><option value="">Ich stehe bei …</option>${LANDMARKS.map((l,i)=>`<option value="${i}">${l.n}</option>`).join('')}</select>
+     <button class="btn sm${UI.placing?' pri':''}" data-act="placing">${UI.placing?'Abbrechen':'Auf Plan tippen'}</button></div></div>
+     ${UI.placing?'<p class="hint">Tippe im Plan auf die Stelle, an der du gerade stehst.</p>':''}
+     <p class="small muted">Kein GPS nötig: Entfernungen werden aus dem Plan berechnet, deshalb funktioniert das auch ohne Netz.</p></div>`;
+  if(S.sel){const p=poiById(S.sel);if(p){const m=dist(p,S.pos);let extra='';
+    if(p.c==='stage'){const run=runningOn(S.simDay,p.stage),next=nextOn(S.simDay,p.stage);extra=`<p class="small">${run?`<span class="pill now">Jetzt</span> ${esc(run.n)} bis ${run.e}`:'Gerade Pause'}${next?` · danach ${esc(next.n)} um ${next.t}`:''}</p>`}
+    h+=`<article class="card" aria-live="polite"><div class="poicard">${ic(p.c,44,p.c==='stage'?`var(--st-${p.stage})`:null)}<div><p class="eyebrow">${CATS[p.c].one}</p><h2 style="font-size:20px">${esc(p.n)}</h2><p class="small muted">${esc(p.i)}</p>${extra}
+      <p style="margin-top:6px"><b>ca. ${m} m</b> <span class="muted">· ${walk(m)} Min. zu Fuß (im Gedränge länger)</span></p></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm${S.route?' pri':''}" data-act="route">${S.route?'Richtung ausblenden':'Richtung zeigen'}</button><button class="btn sm" data-act="unsel">Schließen</button></div></article>`}}
+  h+=`<section class="sec"><h2 style="font-size:18px">Am nächsten zu dir</h2><div class="list">${['wc','food','drink','water','aid'].map(c=>{const p=nearest(c);
+    return `<button data-act="showPoi" data-v="${p.id}" aria-current="${S.sel===p.id}">${ic(c,32)}<span><b>${esc(p.n)}</b><br><span class="small muted">${CATS[c].one}</span></span><span class="d">${p.m} m<small>${walk(p.m)} Min.</small></span></button>`}).join('')}</div></section>
+  </div></div>
+  <section class="sec"><h2>Alle Orte</h2><div class="dir">${Object.keys(CATS).filter(c=>!S.cats.length||S.cats.includes(c)).map(c=>{
+    const items=allPois().filter(p=>p.c===c).map(p=>({...p,m:dist(p,S.pos)})).sort((a,b)=>a.m-b.m);
+    return `<div><h3><span class="dot" style="background:${CATS[c].color}"></span>${CATS[c].name} <span class="muted small">(${items.length})</span></h3><div class="list">${items.map(p=>`<button data-act="showPoi" data-v="${p.id}" aria-current="${S.sel===p.id}">${ic(c,32,c==='stage'?`var(--st-${p.stage})`:null)}<span><b>${esc(p.n)}</b><br><span class="small muted">${esc(p.i)}</span></span><span class="d">${p.m} m<small>${walk(p.m)} Min.</small></span></button>`).join('')}</div></div>`}).join('')}</div></section>`;
+  return h;
+}
+
+/* ===================== Seite: Infos ===================== */
+function infosHTML(){
+  return `<div class="phead"><p class="eyebrow">Gut zu wissen</p><h1>Infos zum Festival</h1></div>
+  <div class="infos">
+   <article class="card"><h2>Termine</h2><dl class="kv">${FEST.dates.map((d,i)=>`<dt>${DAYS[i]}</dt><dd>${d.split(', ')[1]}<br><span class="muted small">Gelände geöffnet ${FEST.open[i]}</span></dd>`).join('')}<dt>Ort</dt><dd>${esc(FEST.place)}</dd><dt>Größe</dt><dd>${FEST.guests}</dd></dl></article>
+   <article class="card"><h2>Bühnen</h2>${Object.entries(STAGES).map(([k,s])=>`<p><span class="dot" style="display:inline-block;background:var(--st-${k});margin-right:6px"></span><b>${s.name}</b><br><span class="small muted">${s.i}</span></p>`).join('')}</article>
+   <article class="card"><h2>Auf dem Gelände</h2><dl class="kv"><dt>Trinkwasser</dt><dd>kostenlos an 3 Stellen</dd><dt>Toiletten</dt><dd>4 Standorte, barrierefrei bei WC Ost und WC Mitte</dd><dt>Becherpfand</dt><dd>2 € pro Becher</dd><dt>Erste Hilfe</dt><dd>Sanitätszelt rund um die Uhr, im Notfall 112</dd><dt>Eingang</dt><dd>Haupteingang Süd</dd></dl></article>
+   <article class="card"><h2>Ohne Netz nutzen</h2><ol class="steps"><li>Diese Website vor dem Festival einmal mit Internet öffnen.</li><li>Warten, bis oben „Offline bereit“ steht.</li><li>Auf dem Gelände einfach wieder öffnen, auch im Flugmodus.</li></ol>
+    <p class="small muted">Tipp: Über „Zum Home-Bildschirm hinzufügen“ hast du die Seite mit einem Tipp griffbereit.</p></article>
+  </div>`;
+}
+
+/* ===================== Seite: Technik-Check (für den Offline-Test) ===================== */
+function device(){
+  const u=navigator.userAgent;let os='Unbekannt',br='Unbekannt';
+  if(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1))os=/iPad/.test(u)||/Macintosh/.test(u)?'iPadOS':'iPhone (iOS)';
+  else if(/Android/.test(u))os='Android';else if(/Windows/.test(u))os='Windows';else if(/Mac OS X/.test(u))os='macOS';else if(/Linux/.test(u))os='Linux';
+  if(/SamsungBrowser/.test(u))br='Samsung Internet';else if(/Edg\//.test(u))br='Edge';else if(/Firefox|FxiOS/.test(u))br='Firefox';else if(/CriOS|Chrome/.test(u))br='Chrome';else if(/Safari/.test(u))br='Safari';
+  return {os,br};
+}
+async function runCheck(){
+  const r={time:new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),online:navigator.onLine,sw:'serviceWorker' in navigator,secure:window.isSecureContext&&location.protocol!=='file:',ctrl:!!(navigator.serviceWorker&&navigator.serviceWorker.controller),cache:null,files:[]};
+  try{const keys=(await caches.keys()).filter(k=>k.startsWith('kesselklang-'));r.cache=keys.sort().pop()||null;
+    if(r.cache){const c=await caches.open(r.cache);for(const f of OFFLINE_FILES)r.files.push([f,!!(await c.match(f,{ignoreSearch:true}))])}}catch(e){}
+  UI.check=r;if(UI.page==='technik')render(false);
+}
+function technikHTML(){
+  const d=device(),r=UI.check;
+  const row=(ok,t,s)=>`<li><span class="s ${ok==null?'wait':ok?'ok':'bad'}">${ok==null?'…':ok?'✓':'✗'}</span><span><b>${t}</b><span class="small muted">${s}</span></span></li>`;
+  const filesOk=r&&r.files.length?r.files.filter(f=>f[1]).length:0;
+  const allOk=r&&r.ctrl&&r.cache&&filesOk===OFFLINE_FILES.length;
+  return `<div class="phead"><p class="eyebrow">Für den Offline-Test im Sprint</p><h1>Technik-Check</h1><p class="muted">Diese Seite zeigt, ob die Website auf diesem Gerät für den Flugmodus gespeichert ist.</p></div>
+  <div class="infos">
+   <article class="card"><div class="row"><h2>Ergebnis</h2>${r?(allOk?'<span class="pill ok">Offline bereit</span>':'<span class="pill bad">Noch nicht offline bereit</span>'):'<span class="pill">Prüfe…</span>'}</div>
+    <ul class="checks">
+     ${row(true,'Gerät',`${d.os} · ${d.br}`)}
+     ${row(r?r.secure:null,'Sichere Verbindung (HTTPS)',r?(r.secure?'Voraussetzung für den Offline-Speicher erfüllt':'Nur über die GitHub-Pages-Adresse möglich, nicht als lokale Datei'):'')}
+     ${row(r?r.sw:null,'Browser unterstützt Offline-Speicher',r?(r.sw?'Service Worker verfügbar':'Dieser Browser kann die Seite nicht offline speichern'):'')}
+     ${row(r?r.ctrl:null,'Service Worker aktiv',r?(r.ctrl?'Die Seite wird aus dem Offline-Speicher geladen':'Seite einmal neu laden, dann erneut prüfen'):'')}
+     ${row(r?!!r.cache&&filesOk===OFFLINE_FILES.length:null,'Dateien gespeichert',r?(r.cache?`${filesOk} von ${OFFLINE_FILES.length} Dateien · Version ${r.cache.replace('kesselklang-','')}`:'Noch nichts gespeichert'):'')}
+     ${row(true,'Internet',r?(r.online?'verbunden':'keine Verbindung (Flugmodus oder kein Netz)'):'')}
+    </ul><p class="small muted">Geprüft um ${r?r.time:'–'} Uhr</p><p><button class="btn sm" data-act="recheck">Erneut prüfen</button></p></article>
+   <article class="card"><h2>So läuft der Offline-Test</h2><ol class="steps">
+     <li>Mit Internet die Website öffnen und warten, bis hier „Offline bereit“ steht.</li>
+     <li>Flugmodus einschalten, WLAN und mobile Daten aus.</li>
+     <li>Browser oder Tab schließen und die Website neu öffnen.</li>
+     <li>Prüfen: Programm filtern, Zeitplan öffnen, im Geländeplan „nur Toiletten“ filtern, Standort setzen.</li>
+     <li>Diese Seite öffnen. Bei „Internet“ muss „keine Verbindung“ stehen, alles andere ist grün.</li>
+     <li>Ergebnis mit Gerät und Browser ins Testprotokoll eintragen.</li></ol></article>
+  </div>`;
+}
+
+/* ===================== Dialog: Act-Details ===================== */
+function renderModal(){
+  const m=$('#modal');
+  if(UI.modal==null){m.hidden=true;m.innerHTML='';return}
+  const a=ACTS[UI.modal],b=badge(a);
+  m.innerHTML=`<div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mT"><button class="x" data-act="closeModal" aria-label="Schließen">×</button>
+    <p class="eyebrow" style="color:var(--st-${a.s})">${STAGES[a.s].name}</p><h2 id="mT" style="font-size:26px">${esc(a.n)}</h2>
+    <p class="muted">${esc(a.g)}</p>${b?`<p>${b}</p>`:''}<p>${esc(a.x)}</p>
+    <dl class="kv"><dt>Wann</dt><dd>${DAYS[a.d]}, ${a.t}–${a.e} Uhr</dd><dt>Dauer</dt><dd>${dur(a.s1-a.s0)}</dd><dt>Wo</dt><dd>${STAGES[a.s].name} · ca. ${dist(stagePois().find(p=>p.stage===a.s),S.pos)} m von dir</dd></dl>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" data-act="showPoi" data-v="st${a.s}">${PIN} ${STAGES[a.s].name} auf dem Plan</button><button class="btn" data-act="closeModal">Schließen</button></div></div>`;
+  m.hidden=false;m.querySelector('.x').focus();
+}
+
+/* ===================== Rendering und Navigation ===================== */
+function render(top){
+  const y=scrollY;
+  $('#heroSlot').innerHTML=UI.page==='start'?heroHTML():'';
+  const fn={start:startHTML,programm:progHTML,plan:planHTML,infos:infosHTML,technik:technikHTML}[UI.page];
+  $('#view').innerHTML=`<div class="page">${fn()}</div>`;
+  document.querySelectorAll('#nav a').forEach(a=>{if(a.getAttribute('href')==='#'+UI.page)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  document.title=({start:'Kesselklang Festival',programm:'Programm · Kesselklang',plan:'Geländeplan · Kesselklang',infos:'Infos · Kesselklang',technik:'Technik-Check · Kesselklang'})[UI.page];
+  if(top)scrollTo(0,0);else scrollTo(0,y);
+  save();
+}
+function route(){
+  const h=location.hash.slice(1);UI.page=PAGES.includes(h)?h:'start';UI.placing=false;UI.modal=null;renderModal();
+  if(UI.page==='technik')runCheck();
+  render(true);
+}
+function go(page){if(location.hash==='#'+page)route();else location.hash=page}
+
+const A={
+  day(t){S.day=+t.dataset.v;render()},
+  stage(t){S.stage=t.dataset.v;render()},
+  view(t){S.view=t.dataset.v;render()},
+  openAct(t){UI.modal=+t.dataset.v;renderModal()},
+  closeModal(){UI.modal=null;renderModal()},
+  showPoi(t){const p=poiById(t.dataset.v);S.sel=p.id;S.route=true;if(S.cats.length&&!S.cats.includes(p.c))S.cats=[];UI.modal=null;renderModal();
+    if(UI.page==='plan'){render();if(innerWidth<900)$('#mapwrap').scrollIntoView({behavior:'smooth',block:'center'})}else go('plan')},
+  cat(t){const c=t.dataset.v;S.cats=c==='all'?[]:S.cats.includes(c)?S.cats.filter(x=>x!==c):[...S.cats,c];
+    if(S.sel){const p=poiById(S.sel);if(p&&S.cats.length&&!S.cats.includes(p.c)){S.sel=null;S.route=false}}render()},
+  placing(){UI.placing=!UI.placing;render()},
+  route(){S.route=!S.route;render()},
+  unsel(){S.sel=null;S.route=false;render()},
+  recheck(){UI.check=null;render();runCheck()}
+};
+document.addEventListener('click',e=>{
+  if(e.target.id==='modal'){A.closeModal();return}
+  const wrap=e.target.closest('#mapwrap');
+  if(wrap&&UI.placing){const svg=$('#map'),pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+    S.pos={x:Math.round(Math.min(392,Math.max(8,p.x))),y:Math.round(Math.min(552,Math.max(8,p.y)))};UI.placing=false;toast('Standort gesetzt: '+whereName(S.pos));render();return}
+  const mk=e.target.closest('[data-poi]');
+  if(mk){S.sel=S.sel===mk.dataset.poi?null:mk.dataset.poi;S.route=!!S.sel;render();return}
+  const t=e.target.closest('[data-act]');if(t&&A[t.dataset.act])A[t.dataset.act](t,e);
+});
+document.addEventListener('change',e=>{
+  const t=e.target,k=t.dataset.ch;if(!k)return;
+  if(k==='simDay')S.simDay=+t.value;
+  if(k==='simMin'&&/^\d\d:\d\d$/.test(t.value)){const [h,m]=t.value.split(':').map(Number);S.simMin=(h<6?h+24:h)*60+m}
+  if(k==='pos'&&t.value!==''){const l=LANDMARKS[+t.value];S.pos={x:l.x,y:l.y};toast('Standort: '+l.n)}
+  render();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&UI.modal!=null)A.closeModal()});
+function toast(msg,btn){const t=$('#toast');t.innerHTML=`<span>${esc(msg)}</span>${btn?`<button id="tb">${esc(btn.label)}</button>`:''}`;t.hidden=false;
+  if(btn)$('#tb').onclick=btn.fn;clearTimeout(toast.t);if(!btn)toast.t=setTimeout(()=>t.hidden=true,2600)}
+
+/* ===================== Offline (Service Worker) ===================== */
+let offlineReady=false;
+function netStatus(){
+  const el=$('#net'),sp=el.querySelector('span');el.className='net';
+  if(!navigator.onLine){el.classList.add('ok');sp.textContent=offlineReady?'Kein Netz · läuft offline':'Kein Netz'}
+  else if(offlineReady){el.classList.add('ok');sp.textContent='Offline bereit'}
+  else if('serviceWorker' in navigator&&window.isSecureContext&&location.protocol!=='file:'){el.classList.add('wait');sp.textContent='Speichere für offline…'}
+  else sp.textContent='Online';
+}
+async function checkReady(){try{const k=await caches.keys();offlineReady=k.some(x=>x.startsWith('kesselklang-'))&&!!navigator.serviceWorker.controller}catch(e){}netStatus();if(UI.page==='technik')runCheck()}
+if('serviceWorker' in navigator&&window.isSecureContext&&location.protocol!=='file:'){
+  const had=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register('sw.js').then(()=>navigator.serviceWorker.ready).then(()=>setTimeout(checkReady,600)).catch(netStatus);
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{checkReady();if(had)toast('Neue Version verfügbar',{label:'Neu laden',fn:()=>location.reload()})});
+}
+addEventListener('online',netStatus);addEventListener('offline',()=>{netStatus();if(UI.page==='technik')runCheck()});
+addEventListener('hashchange',route);
+let rw;addEventListener('resize',()=>{clearTimeout(rw);rw=setTimeout(()=>{if(UI.page==='programm'&&!S.view)render()},200)});
+
+route();netStatus();
+</script>
+</body>
+</html>
